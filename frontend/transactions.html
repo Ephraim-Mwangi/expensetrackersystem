@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Expense Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        
+        <nav class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <div class="logo-text">
+                    <h2>Expense<br>Tracker</h2>
+                    <p>Personal Finance</p>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="/dashboard/">
+                        <i class="fa-solid fa-border-all"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="/transactions/">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/analytics/">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">I</div>
+                    <div class="user-info">
+                        <h4>Loading...</h4>
+                        <p></p>
+                    </div>
+                </div>
+                
+                <a href="/" class="logout-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="header-title">
+                    <h1>Transactions</h1>
+                    <p>Manage all your transactions</p>
+                </div>
+                <button class="add-btn">
+                    <i class="fa-solid fa-plus"></i> Add Transaction
+                </button>
+            </div>
+
+            <div class="filter-bar">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search transactions...">
+                </div>
+                <div class="filter-wrapper">
+                    <i class="fa-solid fa-filter"></i>
+                    <select>
+                        <option>All Types</option>
+                        <option>Income</option>
+                        <option>Expense</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="transaction-list-full">
+                
+                <div class="t-row">
+                    <div class="t-left">
+                        <div class="t-icon green-bg"><i class="fa-solid fa-house-medical"></i></div>
+                        <div class="t-desc">
+                            <div class="t-title">
+                                <h4>Healthcare</h4>
+                                <span class="tag expense">expense</span>
+                            </div>
+                            <p class="t-subtitle">Medical checkup</p>
+                            <p class="t-date">January 18, 2026</p>
+                        </div>
+                    </div>
+                    <div class="t-right">
+                        <span class="amount red-text">-$200.00</span>
+                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                <div class="t-row">
+                    <div class="t-left">
+                        <div class="t-icon purple-bg"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <div class="t-desc">
+                            <div class="t-title">
+                                <h4>Shopping</h4>
+                                <span class="tag expense">expense</span>
+                            </div>
+                            <p class="t-subtitle">Clothing</p>
+                            <p class="t-date">January 15, 2026</p>
+                        </div>
+                    </div>
+                    <div class="t-right">
+                        <span class="amount red-text">-$450.00</span>
+                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                <div class="t-row">
+                    <div class="t-left">
+                        <div class="t-icon orange-bg"><i class="fa-solid fa-film"></i></div>
+                        <div class="t-desc">
+                            <div class="t-title">
+                                <h4>Entertainment</h4>
+                                <span class="tag expense">expense</span>
+                            </div>
+                            <p class="t-subtitle">Movie tickets and dinner</p>
+                            <p class="t-date">January 12, 2026</p>
+                        </div>
+                    </div>
+                    <div class="t-right">
+                        <span class="amount red-text">-$120.00</span>
+                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                <div class="t-row">
+                    <div class="t-left">
+                        <div class="t-icon blue-bg"><i class="fa-solid fa-briefcase"></i></div>
+                        <div class="t-desc">
+                            <div class="t-title">
+                                <h4>Freelance</h4>
+                                <span class="tag income">income</span>
+                            </div>
+                            <p class="t-subtitle">Web design project</p>
+                            <p class="t-date">January 10, 2026</p>
+                        </div>
+                    </div>
+                    <div class="t-right">
+                        <span class="amount green-text">+$800.00</span>
+                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                <div class="t-row">
+                    <div class="t-left">
+                        <div class="t-icon yellow-bg"><i class="fa-solid fa-gas-pump"></i></div>
+                        <div class="t-desc">
+                            <div class="t-title">
+                                <h4>Transportation</h4>
+                                <span class="tag expense">expense</span>
+                            </div>
+                            <p class="t-subtitle">Gas</p>
+                            <p class="t-date">January 8, 2026</p>
+                        </div>
+                    </div>
+                    <div class="t-right">
+                        <span class="amount red-text">-$85.00</span>
+                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                 <div class="t-row">
+                    <div class="t-left">
+                        <div class="t-icon red-bg"><i class="fa-solid fa-burger"></i></div>
+                        <div class="t-desc">
+                            <div class="t-title">
+                                <h4>Food & Dining</h4>
+                                <span class="tag expense">expense</span>
+                            </div>
+                            <p class="t-subtitle">Groceries</p>
+                            <p class="t-date">January 5, 2026</p>
+                        </div>
+                    </div>
+                    <div class="t-right">
+                        <span class="amount red-text">-$350.00</span>
+                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                <div class="t-row">
+                    <div class="t-left">
+                        <div class="t-icon green-bg"><i class="fa-solid fa-coins"></i></div>
+                        <div class="t-desc">
+                            <div class="t-title">
+                                <h4>Salary</h4>
+                                <span class="tag income">income</span>
+                            </div>
+                            <p class="t-subtitle">Monthly salary</p>
+                            <p class="t-date">January 1, 2026</p>
+                        </div>
+                    </div>
+                    <div class="t-right">
+                        <span class="amount green-text">+$5,000.00</span>
+                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="/static/text.js"></script>

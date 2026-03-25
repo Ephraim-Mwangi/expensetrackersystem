@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Expense Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon"><i class="fa-solid fa-wallet"></i></div>
+                <div class="logo-text"><h2>Expense<br>Tracker</h2><p>Personal Finance</p></div>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="/dashboard/"><i class="fa-solid fa-border-all"></i><span>Dashboard</span></a></li>
+                <li><a href="/transactions/"><i class="fa-solid fa-money-bill-transfer"></i><span>Transactions</span></a></li>
+                <li><a href="/analytics/"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info"><h4>Loading...</h4><p></p></div>
+                </div>
+                <a href="#" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <p>Overview of your financial status</p>
+            </div>
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <div class="icon-box green"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <div class="stat-details"><p>Total Income</p><h3>$0.00</h3><span class="green-text">This month</span></div>
+                </div>
+                <div class="card stat-card">
+                    <div class="icon-box red"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                    <div class="stat-details"><p>Total Expenses</p><h3>$0.00</h3><span class="red-text">This month</span></div>
+                </div>
+                <div class="card stat-card">
+                    <div class="icon-box blue"><i class="fa-solid fa-dollar-sign"></i></div>
+                    <div class="stat-details"><p>Balance</p><h3>$0.00</h3><span class="green-text">Net income</span></div>
+                </div>
+                <div class="card stat-card">
+                    <div class="icon-box purple"><i class="fa-solid fa-chart-simple"></i></div>
+                    <div class="stat-details"><p>Transactions</p><h3>0</h3><span class="purple-text">This month</span></div>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="card chart-section">
+                    <h3>Expenses by Category</h3>
+                    <div class="chart-wrapper"><canvas id="expensesChart"></canvas></div>
+                </div>
+                <div class="card transactions-section">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-list"><p>Loading...</p></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/text.js"></script>
+</body>
+</html>

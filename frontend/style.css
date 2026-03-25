@@ -1,0 +1,1421 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background Gradient */
+body.login-page-body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, #7F00FF, #00D4FF) !important;
+}
+
+/* Main Login Card */
+.login-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Logo Styling */
+.logo-section {
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    font-size: 28px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
+}
+
+.logo-section h1 {
+    font-size: 22px;
+    color: #5a32a3; /* Dark Purple Text */
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.subtitle i {
+    color: #5a32a3;
+    margin-left: 4px;
+}
+
+/* Form Styling */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 15px 12px 40px; /* Left padding for icon space */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.input-wrapper input:focus {
+    border-color: #8e2de2;
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0a0a0; /* Purple tint for icon */
+    font-size: 16px;
+}
+
+/* Button Styling */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #8e2de2, #4a00e0);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 0, 224, 0.3);
+}
+
+/* Create Account Link */
+.create-account {
+    margin-top: 15px;
+}
+
+.create-account a {
+    text-decoration: none;
+    color: #8e2de2;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.create-account a:hover {
+    text-decoration: underline;
+}
+
+/* Footer / Demo Credentials */
+.footer-section {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.demo-label {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.demo-label i {
+    color: #f1c40f; /* Gold color for key */
+}
+
+.demo-box {
+    background-color: #f9f3ff; /* Very light purple bg */
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #555;
+    display: inline-block;
+    width: 100%;
+}
+
+.demo-box p {
+    margin: 4px 0;
+}
+
+.demo-box strong {
+    color: #5a32a3;
+}
+
+
+
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f5f7fa; /* Light grey background */
+    padding: 20px;
+    color: #333;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header h2 {
+    margin-bottom: 25px;
+    font-weight: 500;
+    color: #444;
+}
+
+/* Cards General Style */
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Top Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+/* Icon Box Colors */
+.icon-box.green { background: #e0fdf0; color: #00c272; }
+.icon-box.red { background: #ffebeb; color: #ff4d4d; }
+.icon-box.blue { background: #e6f2ff; color: #007bff; }
+.icon-box.purple { background: #f3e5f5; color: #9c27b0; }
+
+.stat-info p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.stat-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.trend {
+    font-size: 12px;
+}
+
+.trend.up { color: #00c272; }
+.trend.down { color: #ff4d4d; }
+.trend.neutral { color: #777; }
+
+/* Content Grid (Chart & Transactions) */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Chart takes more space */
+    gap: 20px;
+}
+
+.chart-container h3, .transactions-container h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Transactions List */
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.t-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+/* Transaction Icon Colors */
+.green-bg { background: #e0fdf0; color: #00c272; }
+.purple-bg { background: #f3e5f5; color: #9c27b0; }
+.orange-bg { background: #fff3e0; color: #ff9800; }
+.blue-bg { background: #e6f2ff; color: #007bff; }
+.yellow-bg { background: #fff9c4; color: #fbc02d; }
+
+.t-details h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.t-details p {
+    font-size: 13px;
+    color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+header {
+  background: rgba(20, 20, 25, 0.8);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #222;
+}
+
+header .logo {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #00bfff;
+}
+
+header .logo span {
+  color: #ff007f;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ccc;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+nav a:hover, nav a.active {
+  color: #00bfff;
+  text-shadow: 0 0 10px #00bfff;
+}
+
+
+
+/* GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #E2E8F0; /* Light Gray Background for the whole page */
+    color: #334155;
+    height: 100vh;
+    overflow: hidden; /* Prevent scrolling of the whole page */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- SIDEBAR STYLING --- */
+.sidebar {
+    width: 280px;
+    background-color: #F8FAFC; /* Clean whitish-gray sidebar */
+    border-right: 1px solid #E2E8F0;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    height: 100%;
+}
+
+/* Logo Area */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    padding-left: 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: #6366f1; /* Purple/Blue primary color */
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.logo-text h2 {
+    font-size: 18px;
+    line-height: 1.2;
+    color: #1e293b;
+}
+
+.logo-text p {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    flex-grow: 1; /* Pushes footer down */
+}
+
+.nav-links li {
+    margin-bottom: 10px;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #64748b; /* Gray text for inactive */
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+/* HOVER STATE */
+.nav-links a:hover {
+    background-color: #eef2ff;
+    color: #6366f1;
+}
+
+/* ACTIVE STATE (The Blue Box) */
+.nav-links li.active a {
+    background-color: #e0e7ff; /* Light Blue Bg */
+    color: #4338ca; /* Dark Blue Text */
+    font-weight: 600;
+}
+
+/* Sidebar Footer (Profile) */
+.sidebar-footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: #7c3aed; /* Purple Avatar */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.user-info h4 {
+    font-size: 14px;
+    color: #1e293b;
+}
+
+.user-info p {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.logout-btn {
+    text-decoration: none;
+    color: #ef4444; /* Red color for logout */
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 5px;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+    flex: 1;
+    padding: 30px 40px;
+    overflow-y: auto; /* Allow scrolling inside main content */
+}
+
+/* Stats Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card {
+    display: flex; /* Stack icon and text vertically like image */
+    flex-direction: column; 
+    gap: 15px;
+}
+
+.icon-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+/* Colors matching the image */
+.green { background: #dcfce7; color: #16a34a; }
+.red { background: #fee2e2; color: #dc2626; }
+.blue { background: #dbeafe; color: #2563eb; }
+.purple { background: #f3e8ff; color: #9333ea; }
+
+.stat-details h3 {
+    font-size: 24px;
+    color: #1e293b;
+    margin: 5px 0;
+}
+
+.stat-details p {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.stat-details span {
+    font-size: 12px;
+}
+.green-text { color: #16a34a; }
+.red-text { color: #dc2626; }
+.purple-text { color: #9333ea; }
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.chart-section h3, .transactions-section h3 {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #334155;
+}
+
+.chart-wrapper {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Transaction List */
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.t-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.t-item .t-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.t-item .t-info {
+    flex-grow: 1;
+}
+
+.t-info h4 {
+    font-size: 14px;
+    color: #1e293b;
+}
+
+.t-info p {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.t-amount {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.green-bg { background: #dcfce7; color: #16a34a; }
+.purple-bg { background: #f3e8ff; color: #9333ea; }
+.orange-bg { background: #ffedd5; color: #ea580c; }
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8fafc; /* Very light gray bg */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Header Section */
+.header-section {
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6); /* Purple Gradient */
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+}
+
+.header-section h1 {
+    font-size: 24px;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.header-section p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Card Styling */
+.login-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+/* Toggle Switch */
+.toggle-container {
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 8px;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.toggle-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toggle-btn.active {
+    background: white;
+    color: #0f172a;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Form Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: #4f46e5;
+}
+
+/* Info Box */
+.info-box {
+    margin-top: 25px;
+    background: #eff6ff; /* Light blue bg */
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #1e40af;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.info-box strong {
+    font-weight: 600;
+}
+
+
+/* --- INCLUDE GLOBAL STYLES & SIDEBAR --- */
+/* (For simplicity, I am repeating the core styles so this file works standalone. 
+   In a real project, you would have one main.css file) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #334155;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- SIDEBAR STYLES (Copied for consistency) --- */
+.sidebar {
+    width: 280px;
+    background-color: white;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    height: 100%;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    padding-left: 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: #6366f1;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.logo-text h2 { font-size: 18px; color: #1e293b; line-height: 1.2; }
+.logo-text p { font-size: 12px; color: #64748b; }
+
+.nav-links { list-style: none; flex-grow: 1; }
+.nav-links li { margin-bottom: 10px; }
+.nav-links a {
+    display: flex; align-items: center; gap: 15px;
+    padding: 12px 20px; text-decoration: none;
+    color: #64748b; font-weight: 500; border-radius: 12px;
+    transition: all 0.3s;
+}
+.nav-links a:hover { background-color: #eef2ff; color: #6366f1; }
+.nav-links li.active a { background-color: #e0e7ff; color: #4338ca; font-weight: 600; }
+
+.sidebar-footer { border-top: 1px solid #e2e8f0; padding-top: 20px; }
+.user-profile { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.avatar { width: 40px; height: 40px; background: #7c3aed; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+.user-info h4 { font-size: 14px; color: #1e293b; }
+.user-info p { font-size: 11px; color: #64748b; }
+.logout-btn { text-decoration: none; color: #ef4444; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px; padding-left: 5px; }
+
+
+/* --- TRANSACTIONS PAGE SPECIFIC STYLES --- */
+
+.main-content {
+    flex: 1;
+    padding: 30px 40px;
+    overflow-y: auto;
+}
+
+/* Header Section */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.header-title h1 { font-size: 24px; color: #1e293b; }
+.header-title p { color: #64748b; font-size: 14px; margin-top: 5px; }
+
+.add-btn {
+    background-color: #2563eb; /* Blue button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.add-btn:hover { background-color: #1d4ed8; }
+
+/* Filter Bar */
+.filter-bar {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border: 1px solid #e2e8f0;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.search-wrapper i { color: #94a3b8; }
+.search-wrapper input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    color: #334155;
+}
+
+.filter-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-left: 1px solid #e2e8f0;
+    padding-left: 15px;
+    margin-left: 15px;
+}
+
+.filter-wrapper select {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #475569;
+    cursor: pointer;
+    background: transparent;
+}
+
+/* Transaction List Rows */
+.transaction-list-full {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden; /* Ensures rounded corners on children */
+}
+
+.t-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s;
+}
+
+.t-row:hover { background-color: #f8fafc; }
+.t-row:last-child { border-bottom: none; }
+
+.t-left {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.t-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* Icon Colors */
+.green-bg { background: #dcfce7; color: #16a34a; }
+.purple-bg { background: #f3e8ff; color: #9333ea; }
+.orange-bg { background: #ffedd5; color: #ea580c; }
+.blue-bg { background: #dbeafe; color: #2563eb; }
+.yellow-bg { background: #fef9c3; color: #ca8a04; }
+.red-bg { background: #fee2e2; color: #dc2626; }
+
+.t-desc { display: flex; flex-direction: column; gap: 4px; }
+
+.t-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.t-title h4 { font-size: 15px; color: #1e293b; font-weight: 600; }
+
+/* Tags (Expense/Income) */
+.tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: lowercase;
+    font-weight: 500;
+}
+
+.tag.expense { background-color: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+.tag.income { background-color: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+
+.t-subtitle { font-size: 13px; color: #64748b; }
+.t-date { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+.t-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.amount { font-weight: 600; font-size: 15px; }
+.green-text { color: #16a34a; }
+.red-text { color: #dc2626; }
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.delete-btn:hover { background-color: #fee2e2; }
+    /* --- GLOBAL FULL SCREEN RESET --- */
+body {
+    margin: 0;          /* Remove default browser margins */
+    padding: 0;         /* Remove default padding */
+    width: 100vw;       /* Force width to 100% of the viewport */
+    height: 100vh;      /* Force height to 100% ofoverflow: hidden;   /* Stop the whole page from scrolling (only content scrolls) */
+    overflow: hidden;   /* Stop the whole page from scrolling (only content scrolls) */
+    background-color: #f1f5f9; /* Clean light gray background (No Blue Gradient) */
+    
+    /* VITAL: This overrides the Login page centering logic */
+    display: block !important; 
+}
+
+/* --- MAIN CONTAINER --- */
+.container {
+    display: flex;      /* Keep Sidebar and Content side-by-side */
+    width: 100%;        /* Fill the body width */
+    height: 100%;       /* Fill the body height */
+    max-width: none;    /* Remove any width restrictions */
+    border-radius: 0;   /* Remove rounded corners from the outer wrapper */
+    margin: 0;          /* Remove auto margins */
+    box-shadow: none;   /* Remove any shadows on the outer wrapper */
+}
+
+/* --- SIDEBAR FIXES --- */
+.sidebar {
+    width: 280px;       /* Fixed width */
+    height: 100%;       /* Full height */
+    position: relative; /* Stays in the flow */
+    border-radius: 0;   /* Sidebar should be a rectangle, no curves on left edge */
+}
+
+/* --- MAIN CONTENT FIXES --- */
+.main-content {
+    flex: 1;            /* Take up ALL remaining space */
+    height: 100%;       /* Full height */
+    overflow-y: auto;   /* Scroll INSIDE this area if content is long */
+    padding: 30px;
+}
+
+
+
+
+/* 1. Force the Container to pack items to the left */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* KEY FIX: Removes the gap between sidebar and content */
+    align-items: stretch;        /* Ensures full height */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 2. Ensure Sidebar is fixed width and stays left */
+.sidebar {
+    width: 280px;        /* Fixed width */
+    flex-shrink: 0;      /* Prevent shrinking */
+    background: white;   /* Ensure it has a background color */
+}
+
+/* 3. Make Main Content fill ALL the remaining empty space */
+.main-content {
+    flex-grow: 1;        /* KEY FIX: Forces this box to expand and fill the blue gap */
+    width: auto;         /* Reset any fixed widths */
+    margin: 0;           /* Remove margins */
+    padding: 30px;       /* Keep inner spacing */
+    overflow-y: auto;    /* Allow scrolling inside this area */
+}
+
+
+
+
+
+
+/* --- GLOBAL FULL SCREEN RESET & TYPOGRAPHY --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f8fafc; /* Light gray background */
+    color: #334155;
+    display: block !important;
+}
+
+/* --- MAIN LAYOUT --- */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- SIDEBAR (Uniform across pages) --- */
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background-color: white;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    height: 100%;
+}
+
+.logo-section { display: flex; align-items: center; gap: 15px; margin-bottom: 50px; padding-left: 10px; }
+.logo-icon { width: 40px; height: 40px; background: #6366f1; color: white; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+.logo-text h2 { font-size: 18px; color: #1e293b; line-height: 1.2; }
+.logo-text p { font-size: 12px; color: #64748b; }
+
+.nav-links { list-style: none; flex-grow: 1; }
+.nav-links li { margin-bottom: 10px; }
+.nav-links a { display: flex; align-items: center; gap: 15px; padding: 12px 20px; text-decoration: none; color: #64748b; font-weight: 500; border-radius: 12px; transition: all 0.3s; }
+.nav-links a:hover { background-color: #eef2ff; color: #6366f1; }
+.nav-links li.active a { background-color: #e0e7ff; color: #4338ca; font-weight: 600; }
+
+.sidebar-footer { border-top: 1px solid #e2e8f0; padding-top: 20px; }
+.user-profile { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.avatar { width: 40px; height: 40px; background: #7c3aed; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+.user-info h4 { font-size: 14px; color: #1e293b; }
+.user-info p { font-size: 11px; color: #64748b; }
+.logout-btn { text-decoration: none; color: #ef4444; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px; padding-left: 5px; }
+
+
+/* --- ANALYTICS SPECIFIC CONTENT --- */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 30px 40px;
+    overflow-y: auto; /* Allows scrolling if charts take up too much space */
+}
+
+/* Header */
+.page-header h1 { font-size: 26px; font-weight: 700; color: #1e293b; margin-bottom: 5px; }
+.page-header p { font-size: 14px; color: #64748b; }
+
+/* Chart Cards Container */
+.chart-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.chart-card h3 {
+    font-size: 16px;
+    color: #334155;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Chart Canvas Sizing */
+.canvas-container {
+    position: relative;
+    width: 100%;
+}
+
+.line-chart-container, .bar-chart-container {
+    height: 300px; /* Forces Line and Bar charts to a nice height */
+}
+
+.pie-chart-container {
+    height: 280px; /* Forces Pie charts to remain circular and well-sized */
+    display: flex;
+    justify-content: center;
+}
+
+/* Grid for Bottom Pies */
+.pie-charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 equal columns */
+    gap: 25px;
+}
+
+
+
+
+
+/* 1. Force the background to light gray and override any gradients */
+body {
+    background: #f8fafc !important; /* The !important forces it to ignore the blue gradient */
+    color: #334155;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 30px 40px;
+    background-color: #f8fafc; /* Double-checking the background is gray here too */
+    overflow-y: auto; 
+}
+
+/* 2. Fix the Header so the title and subtitle stack on top of each other */
+.page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Forces text to the left */
+    justify-content: flex-start;
+    gap: 5px; /* Space between title and subtitle */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.page-header h1 { 
+    font-size: 26px; 
+    font-weight: 700; 
+    color: #1e293b; 
+    margin: 0; /* Remove default margins */
+}
+
+.page-header p { 
+    font-size: 14px; 
+    color: #64748b; 
+    margin: 0;
+}
+
+
+
+/* 1. Ensure the body takes up the exact size of the window */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #f8fafc !important; 
+    color: #334155;
+    overflow: hidden; /* Prevents double scrollbars */
+}
+
+/* 2. Make the container stretch across the whole body */
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+/* 3. The Magic Fix: Force main-content to take ALL remaining space */
+.main-content {
+    flex: 1; /* This tells it to fill all space left by the sidebar */
+    min-width: 0; /* Prevents flexbox bugs from squishing content */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 30px 40px;
+    background-color: #f8fafc;
+    overflow-y: auto; /* Pushes the scrollbar to the far right edge */
+}
+
+/* 4. Ensure your chart cards stretch fully inside the main content */
+.chart-card {
+    width: 100%;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+
+
+
+
+/* -------------------------------------
+   Specific Fix for Login Page Centering
+---------------------------------------- */
+body.login-page-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers vertically */
+    align-items: center;     /* Centers horizontally */
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc; /* Adjust to your preferred background color */
+}
+
+/* If your login card is inside a specific container, ensure it doesn't stretch */
+.login-page-body .container,
+.login-page-body .login-container {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Add Transaction Modal ───────────────────────── */
+.modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+}
+.modal-box {
+    background: #fff; border-radius: 16px;
+    padding: 2rem; width: 420px; max-width: 95vw;
+    display: flex; flex-direction: column; gap: 1rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal-box h3 { font-size: 1.25rem; font-weight: 600; color: #1e293b; margin: 0; }
+.modal-box .input-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.modal-box .input-group label { font-size: 0.85rem; color: #64748b; font-weight: 500; }
+.modal-box .input-group input,
+.modal-box .input-group select {
+    padding: 0.6rem 0.9rem; border: 1px solid #e2e8f0;
+    border-radius: 8px; font-size: 0.95rem; font-family: 'Poppins', sans-serif;
+    outline: none; transition: border 0.2s;
+}
+.modal-box .input-group input:focus,
+.modal-box .input-group select:focus { border-color: #6366f1; }
+.modal-actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+.cancel-btn {
+    flex: 1; padding: 0.7rem; border: 1px solid #e2e8f0;
+    border-radius: 8px; background: #fff; cursor: pointer;
+    font-family: 'Poppins', sans-serif; color: #64748b;
+    font-weight: 500; transition: background 0.2s;
+}
+.cancel-btn:hover { background: #f1f5f9; }
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}

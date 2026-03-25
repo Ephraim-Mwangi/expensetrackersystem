@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Expense Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        
+        <nav class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <div class="logo-text">
+                    <h2>Expense<br>Tracker</h2>
+                    <p>Personal Finance</p>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="/dashboard/">
+                        <i class="fa-solid fa-border-all"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/transactions/">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="/analytics/">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">I</div>
+                    <div class="user-info">
+                        <h4>user</h4>
+                        <p>email.example@gmail.com</p>
+                    </div>
+                </div>
+                
+                <a href="#"class="logout-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Analytics</h1>
+                <p>Visualize your spending patterns and trends</p>
+            </div>
+
+            <div class="chart-card full-width">
+                <h3>Monthly Income vs Expenses</h3>
+                <div class="canvas-container line-chart-container">
+                    <canvas id="monthlyTrendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card full-width">
+                <h3>Category Breakdown</h3>
+                <div class="canvas-container bar-chart-container">
+                    <canvas id="categoryBarChart"></canvas>
+                </div>
+            </div>
+
+            <div class="pie-charts-grid">
+                <div class="chart-card">
+                    <h3>Expense Distribution</h3>
+                    <div class="canvas-container pie-chart-container">
+                        <canvas id="expensePieChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Income Distribution</h3>
+                    <div class="canvas-container pie-chart-container">
+                        <canvas id="incomePieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+    
+    <script src="/static/text.js"></script></body>
+</html>
