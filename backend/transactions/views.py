@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from decimal import Decimal
 from datetime import date
-from .models import Transaction
-from .serializers import RegisterSerializer, UserSerializer, TransactionSerializer
+from .models import Transaction, UserProfile
+from .serializers import RegisterSerializer, UserSerializer, TransactionSerializer, UserProfileSerializer
 from django.shortcuts import render
 
 
@@ -59,6 +59,17 @@ def logout(request):
 @api_view(['GET'])
 def me(request):
     return Response(UserSerializer(request.user).data)
+
+@api_view(['GET', 'PATCH'])
+def currency(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    if request.method == 'PATCH':
+        serializer = UserProfileSerializer(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(UserProfileSerializer(profile).data)
 
 
 # ── Dashboard API ─────────────────────────────────────────────

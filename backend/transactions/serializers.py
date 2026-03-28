@@ -1,6 +1,32 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Transaction
+from .models import Transaction, UserProfile
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = UserProfile
+        fields = ['currency']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    full_name     = serializers.SerializerMethodField()
+    avatar_letter = serializers.SerializerMethodField()
+    currency      = serializers.SerializerMethodField()
+
+    class Meta:
+        model  = User
+        fields = ['id', 'username', 'email', 'full_name', 'avatar_letter', 'currency']
+
+    def get_full_name(self, obj):
+        return obj.get_full_name() or obj.username
+
+    def get_avatar_letter(self, obj):
+        return (obj.first_name or obj.username or 'U')[0].upper()
+
+    def get_currency(self, obj):
+        profile, _ = UserProfile.objects.get_or_create(user=obj)
+        return profile.currency
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -39,21 +65,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             first_name=parts[0] if parts else '',
             last_name=parts[1] if len(parts) > 1 else '',
         )
-
-
-class UserSerializer(serializers.ModelSerializer):
-    full_name     = serializers.SerializerMethodField()
-    avatar_letter = serializers.SerializerMethodField()
-
-    class Meta:
-        model  = User
-        fields = ['id', 'username', 'email', 'full_name', 'avatar_letter']
-
-    def get_full_name(self, obj):
-        return obj.get_full_name() or obj.username
-
-    def get_avatar_letter(self, obj):
-        return (obj.first_name or obj.username or 'U')[0].upper()
 
 
 class TransactionSerializer(serializers.ModelSerializer):
