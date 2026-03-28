@@ -33,23 +33,38 @@
             <div class="page-header">
                 <h1>Dashboard</h1>
                 <p>Overview of your financial status</p>
+                <select id="currencySelect" onchange="updateCurrency(this.value)" style="padding:6px 10px; border-radius:6px; border:1px solid #ccc;">
+                    <option value="USD">$ USD</option>
+                    <option value="EUR">€ EUR</option>
+                    <option value="GBP">£ GBP</option>
+                    <option value="KES">KSh KES</option>
+                    <option value="NGN">₦ NGN</option>
+                    <option value="GHS">₵ GHS</option>
+                    <option value="ZAR">R ZAR</option>
+                    <option value="UGX">USh UGX</option>
+                    <option value="TZS">TSh TZS</option>
+                    <option value="CAD">C$ CAD</option>
+                    <option value="AUD">A$ AUD</option>
+                    <option value="JPY">¥ JPY</option>
+                    <option value="INR">₹ INR</option>
+                </select>
             </div>
-            <div class="stats-grid">
+           <div class="stats-grid">
                 <div class="card stat-card">
                     <div class="icon-box green"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                    <div class="stat-details"><p>Total Income</p><h3>$0.00</h3><span class="green-text">This month</span></div>
+                    <div class="stat-details"><p>Total Income</p><h3 id="total-income">$0.00</h3><span class="green-text">This month</span></div>
                 </div>
                 <div class="card stat-card">
                     <div class="icon-box red"><i class="fa-solid fa-arrow-trend-down"></i></div>
-                    <div class="stat-details"><p>Total Expenses</p><h3>$0.00</h3><span class="red-text">This month</span></div>
+                    <div class="stat-details"><p>Total Expenses</p><h3 id="total-expenses">$0.00</h3><span class="red-text">This month</span></div>
                 </div>
                 <div class="card stat-card">
                     <div class="icon-box blue"><i class="fa-solid fa-dollar-sign"></i></div>
-                    <div class="stat-details"><p>Balance</p><h3>$0.00</h3><span class="green-text">Net income</span></div>
+                    <div class="stat-details"><p>Balance</p><h3 id="balance">$0.00</h3><span class="green-text">Net income</span></div>
                 </div>
                 <div class="card stat-card">
                     <div class="icon-box purple"><i class="fa-solid fa-chart-simple"></i></div>
-                    <div class="stat-details"><p>Transactions</p><h3>0</h3><span class="purple-text">This month</span></div>
+                    <div class="stat-details"><p>Transactions</p><h3 id="transaction-count">0</h3><span class="purple-text">This month</span></div>
                 </div>
             </div>
             <div class="content-grid">
@@ -66,5 +81,37 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/text.js"></script>
+
+<script>
+async function updateCurrency(value) {
+    const token = localStorage.getItem('token');
+    await fetch('/api/currency/', {
+        method:  'PATCH',
+        headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type':  'application/json'
+        },
+        body: JSON.stringify({ currency: value })
+    });
+    localStorage.setItem('userCurrency', value);
+    location.reload(); // reload to apply new currency
+}
+</script>
+
+<script>
+async function updateCurrency(value) {
+    const token = localStorage.getItem('authToken');
+    await fetch(`${API_BASE}/currency/`, {
+        method:  'PATCH',
+        headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type':  'application/json'
+        },
+        body: JSON.stringify({ currency: value })
+    });
+    localStorage.setItem('userCurrency', value);
+    location.reload();
+}
+</script>
 </body>
 </html>

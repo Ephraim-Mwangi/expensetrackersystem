@@ -68,7 +68,29 @@ function parseApiError(data) {
     }
     return messages.join('\n') || 'An unknown error occurred.';
 }
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load currency first before rendering amounts
+    const token = localStorage.getItem('authToken');
+    if (token) {
+        try {
+            const res  = await fetch(`${API_BASE}/currency/`, {
+                headers: { 'Authorization': `Token ${token}` }
+            });
+            const data = await res.json();
+            localStorage.setItem('userCurrency', data.currency);
+            const sel = document.getElementById('currencySelect');
+            if (sel) sel.value = data.currency;
+        } catch(e) {}
+    }
 
+    loadDashboard();
+    loadTransactions();
+    loadAnalytics();
+    setupAddTransaction();
+
+    document.querySelector('.search-wrapper input')?.addEventListener('input', loadTransactions);
+    document.querySelector('.filter-wrapper select')?.addEventListener('change', loadTransactions);
+});
 
 // ─────────────────────────────────────────────────────────────
 //  LOGIN PAGE  (index.html)
@@ -183,11 +205,11 @@ async function loadDashboard() {
     }
 
     // Update stat cards
-    const statCards = document.querySelectorAll('.stat-card h3');
-    if (statCards[0]) statCards[0].textContent = `$${parseFloat(data.total_income).toFixed(2)}`;
-    if (statCards[1]) statCards[1].textContent = `$${parseFloat(data.total_expenses).toFixed(2)}`;
-    if (statCards[2]) statCards[2].textContent = `$${parseFloat(data.balance).toFixed(2)}`;
-    if (statCards[3]) statCards[3].textContent = data.transaction_count;
+    // Update stat cards using IDs
+    document.getElementById('total-income').textContent     = formatCurrency(data.total_income);
+    document.getElementById('total-expenses').textContent   = formatCurrency(data.total_expenses);
+    document.getElementById('balance').textContent          = formatCurrency(data.balance);
+    document.getElementById('transaction-count').textContent = data.transaction_count;
 
     // Update recent transactions
     const list = document.querySelector('.transaction-list');
@@ -203,7 +225,7 @@ async function loadDashboard() {
                         <p>${t.title || t.description || ''}</p>
                     </div>
                     <div class="t-amount ${t.type === 'income' ? 'green' : 'red'}-text">
-                        ${t.type === 'income' ? '+' : '-'}$${parseFloat(t.amount).toFixed(2)}
+                     ${t.type === 'income' ? '+' : '-'}${formatCurrency(t.amount)}   
                     </div>
                 </div>
             `).join('');
@@ -276,7 +298,7 @@ async function loadTransactions() {
                 </div>
                 <div class="t-right">
                     <span class="amount ${t.type === 'income' ? 'green' : 'red'}-text">
-                        ${t.type === 'income' ? '+' : '-'}$${parseFloat(t.amount).toFixed(2)}
+                      ${t.type === 'income' ? '+' : '-'}${formatCurrency(t.amount)}  
                     </span>
                     <button class="delete-btn" onclick="deleteTransaction(${t.id})">
                         <i class="fa-regular fa-trash-can"></i>
@@ -344,27 +366,47 @@ function setupAddTransaction() {
         `;
         document.body.appendChild(modal);
 
-        document.getElementById('m-cancel').onclick = () => modal.remove();
-        document.getElementById('m-save').onclick = async () => {
-            const payload = {
-                title:    document.getElementById('m-title').value.trim(),
-                amount:   parseFloat(document.getElementById('m-amount').value),
-                type:     document.getElementById('m-type').value,
-                category: document.getElementById('m-category').value,
-                date:     document.getElementById('m-date').value,
-            };
-            if (!payload.title || !payload.amount || !payload.date) {
-                alert('Please fill in all fields.');
-                return;
-            }
-            const result = await apiRequest('/transactions/', 'POST', payload);
-            if (result && result.id) {
-                modal.remove();
-                loadTransactions();
-            } else {
-                alert('Failed to save transaction.');
-            }
-        };
+// Use event delegation instead of getElementById
+modal.addEventListener('click', async (e) => {
+    if (e.target.id === 'm-cancel' || e.target.closest('#m-cancel')) {
+        modal.remove();
+        return;
+    }
+
+    if (e.target.id === 'm-save' || e.target.closest('#m-save')) {
+    const titleEl    = modal.querySelector('#m-title');
+    const amountEl   = modal.querySelector('#m-amount');
+    const typeEl     = modal.querySelector('#m-type');
+    const categoryEl = modal.querySelector('#m-category');
+    const dateEl     = modal.querySelector('#m-date');
+
+    const payload = {
+        title:       titleEl?.value.trim(),
+        amount:      parseFloat(amountEl?.value),
+        type:        typeEl?.value,
+        category:    categoryEl?.value,
+        date:        dateEl?.value,
+        description: '',
+    };
+
+    console.log('Saving transaction:', payload);
+
+    if (!payload.title || !payload.amount || !payload.date) {
+        alert(`Please fill in all fields.\nTitle: "${payload.title}"\nAmount: ${payload.amount}\nDate: "${payload.date}"`);
+        return;
+    }
+
+    const result = await apiRequest('/transactions/', 'POST', payload);
+    console.log('Save result:', result);
+
+    if (result && result.id) {
+        modal.remove();
+        loadTransactions();
+    } else {
+        alert('Failed to save transaction. Check the console for details.');
+    }
+}
+});
     });
 }
 
@@ -498,3 +540,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.search-wrapper input')?.addEventListener('input', loadTransactions);
     document.querySelector('.filter-wrapper select')?.addEventListener('change', loadTransactions);
 });
+function formatCurrency(amount) {
+    const CURRENCY_SYMBOLS = {
+        USD: '$', EUR: '€', GBP: '£', KES: 'KSh',
+        NGN: '₦', GHS: '₵', ZAR: 'R', UGX: 'USh',
+        TZS: 'TSh', CAD: 'C$', AUD: 'A$', JPY: '¥', INR: '₹'
+    };
+    const currency = localStorage.getItem('userCurrency') || 'USD';
+    const symbol   = CURRENCY_SYMBOLS[currency] || currency;
+    return `${symbol}${parseFloat(amount).toFixed(2)}`;
+}
