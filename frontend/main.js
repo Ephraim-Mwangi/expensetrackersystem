@@ -555,3 +555,12 @@ function formatCurrency(amount) {
 function toggleMobileNav() {
     document.querySelector('.sidebar').classList.toggle('mobile-nav-open');
 }
+
+
+
+function toggleMobileNav() {
+    const drawer = document.getElementById('mobileDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+}
