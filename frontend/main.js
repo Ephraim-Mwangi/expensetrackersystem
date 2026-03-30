@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 //  CONFIG
 // ─────────────────────────────────────────────────────────────
-const API_BASE = 'https://expensetrackersystem-t3wj.onrender.com/api';
+const API_BASE = 'http://127.0.0.1:8000/api';
 
 function getToken() {
     return localStorage.getItem('authToken');
@@ -157,7 +157,7 @@ if (authForm) {
             console.log('Token saved:', data.token);
             console.log('Redirecting to /dashboard/');
 
-            window.location.href = '/dashboard.html';
+            window.location.href = '/dashboard/';
 
         } catch (err) {
             console.error('Auth error:', err);
@@ -551,16 +551,31 @@ function formatCurrency(amount) {
     return `${symbol}${parseFloat(amount).toFixed(2)}`;
 }
 
+// ─────────────────────────────────────────────────────────────
+//  MOBILE SIDEBAR TOGGLE
+// ─────────────────────────────────────────────────────────────
+(function setupMobileSidebar() {
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar   = document.getElementById('sidebar');
+    const overlay   = document.getElementById('sidebarOverlay');
 
-function toggleMobileNav() {
-    document.querySelector('.sidebar').classList.toggle('mobile-nav-open');
-}
+    if (!hamburger || !sidebar || !overlay) return;
 
+    function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+    }
 
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+    }
 
-function toggleMobileNav() {
-    const drawer = document.getElementById('mobileDrawer');
-    const overlay = document.getElementById('drawerOverlay');
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('open');
-}
+    hamburger.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar when a nav link is tapped (mobile UX)
+    sidebar.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', closeSidebar);
+    });
+})();
