@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions - Expense Tracker</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
-        
-        <nav class="sidebar">
+
+        <!-- Hamburger button (mobile only) -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <!-- Overlay (tapping outside closes menu) -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <nav class="sidebar" id="sidebar">
             <div class="logo-section">
                 <div class="logo-icon">
                     <i class="fa-solid fa-wallet"></i>
@@ -21,9 +28,6 @@
                     <h2>Expense<br>Tracker</h2>
                     <p>Personal Finance</p>
                 </div>
-                <button class="hamburger-btn" onclick="toggleMobileNav()">
-                    <i class="fa-solid fa-bars"></i>
-                </button> 
             </div>
             
             <ul class="nav-links">
@@ -221,17 +225,4 @@
         </main>
     </div>
 
-    <script src="/main.js"></script>
-    <script>
-    const CURRENCY_SYMBOLS = {
-        USD: '$', EUR: '€', GBP: '£', KES: 'KSh',
-        NGN: '₦', GHS: '₵', ZAR: 'R', UGX: 'USh',
-        TZS: 'TSh', CAD: 'C$', AUD: 'A$', JPY: '¥', INR: '₹'
-    };
-
-    function formatAmount(amount) {
-        const currency = localStorage.getItem('userCurrency') || 'USD';
-        const symbol   = CURRENCY_SYMBOLS[currency] || currency;
-        return `${symbol}${parseFloat(amount).toLocaleString()}`;
-    }
-    </script>
+    <script src="/static/text.js"></script>
