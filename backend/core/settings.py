@@ -48,7 +48,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 CORS_ALLOWED_ORIGINS = [
-    'https://expensetracker-frontend.onrender.com'
+    'https://expensetrackersystem-1.onrender.com'
 ]
 
 ROOT_URLCONF = 'core.urls'

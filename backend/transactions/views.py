@@ -167,16 +167,3 @@ class TransactionDetailView(generics.RetrieveUpdateDestroyAPIView):
 # ── HTML Page Views ───────────────────────────────────────────
 
 
-def login_page(request):
-    return render(request, 'index.html')
-
-def dashboard_page(request):
-    return render(request, 'dashboard.html')
-
-def transactions_page(request):
-    return render(request, 'transactions.html')
-
-def analytics_page(request):
-    return render(request, 'analytics.html')
-
-# Create your views here.
