@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics - Expense Tracker</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -12,14 +12,7 @@
 
     <div class="container">
         
-        <!-- Hamburger button (mobile only) -->
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <!-- Overlay (tapping outside closes menu) -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-        <nav class="sidebar" id="sidebar">
+        <nav class="sidebar">
             <div class="logo-section">
                 <div class="logo-icon">
                     <i class="fa-solid fa-wallet"></i>
@@ -28,6 +21,9 @@
                     <h2>Expense<br>Tracker</h2>
                     <p>Personal Finance</p>
                 </div>
+                <button class="hamburger-btn" onclick="toggleMobileNav()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>       
             </div>
             
             <ul class="nav-links">
@@ -56,7 +52,7 @@
                     <div class="avatar">I</div>
                     <div class="user-info">
                         <h4>user</h4>
-                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71141c10181d5f1409101c011d1431161c10181d5f121e1c">[email&#160;protected]</a></p>
+                        <p>email.example@gmail.com</p>
                     </div>
                 </div>
                 
@@ -105,4 +101,8 @@
         </main>
     </div>
 
-    <script data
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+    
+    <script src="/main.js"></script></body>
+</html>

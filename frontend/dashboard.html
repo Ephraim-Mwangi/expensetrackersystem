@@ -4,23 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Expense Tracker</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <!-- Hamburger button (mobile only) -->
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <!-- Overlay (tapping outside closes menu) -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-        <nav class="sidebar" id="sidebar">
+        <nav class="sidebar">
             <div class="logo-section">
                 <div class="logo-icon"><i class="fa-solid fa-wallet"></i></div>
                 <div class="logo-text"><h2>Expense<br>Tracker</h2><p>Personal Finance</p></div>
+                <button class="hamburger-btn" onclick="toggleMobileNav()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>   
             </div>
             <ul class="nav-links">
                 <li class="active"><a href="/dashboard/"><i class="fa-solid fa-border-all"></i><span>Dashboard</span></a></li>
@@ -87,7 +83,23 @@
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/text.js"></script>
+    <script src="/main.js"></script>
+
+<script>
+async function updateCurrency(value) {
+    const token = localStorage.getItem('token');
+    await fetch('/api/currency/', {
+        method:  'PATCH',
+        headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type':  'application/json'
+        },
+        body: JSON.stringify({ currency: value })
+    });
+    localStorage.setItem('userCurrency', value);
+    location.reload(); // reload to apply new currency
+}
+</script>
 
 <script>
 async function updateCurrency(value) {
