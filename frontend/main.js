@@ -553,14 +553,9 @@ function formatCurrency(amount) {
 
 
 function toggleMobileNav() {
-    document.querySelector('.sidebar').classList.toggle('mobile-nav-open');
-}
-
-
-
-function toggleMobileNav() {
-    const drawer = document.getElementById('mobileDrawer');
-    const overlay = document.getElementById('drawerOverlay');
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('open');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (!sidebar || !overlay) return;
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
 }
