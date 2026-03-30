@@ -157,7 +157,7 @@ if (authForm) {
             console.log('Token saved:', data.token);
             console.log('Redirecting to /dashboard/');
 
-            window.location.href = '/dashboard/';
+            window.location.href = '/dashboard.html';
 
         } catch (err) {
             console.error('Auth error:', err);
