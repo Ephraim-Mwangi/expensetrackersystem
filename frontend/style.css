@@ -1424,9 +1424,12 @@ body.login-page-body {
 
 
 /* ─── MOBILE RESPONSIVENESS ─────────────────────────── */
+.hamburger-btn {
+    display: none;
+}
+
 @media (max-width: 768px) {
 
-    /* Allow page to scroll on mobile */
     body, html {
         overflow: auto !important;
         height: auto !important;
@@ -1438,122 +1441,122 @@ body.login-page-body {
         min-height: 100vh;
     }
 
-    /* ── Sidebar becomes a top navbar ── */
+    /* Sidebar becomes sticky top bar */
     .sidebar {
         width: 100% !important;
         height: auto !important;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 20px;
-        border-right: none;
-        border-bottom: 1px solid #e2e8f0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: white;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 15px 20px !important;
+        border-right: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 100 !important;
+        background: white !important;
+        overflow: visible !important;
     }
 
-    /* Hide nav links & user info on mobile */
+    /* Hide nav and footer inside collapsed sidebar */
     .sidebar .nav-links,
     .sidebar .sidebar-footer {
-        display: none;
+        display: none !important;
     }
 
-    /* Show logo only */
-    .logo-section {
-        margin-bottom: 0;
-        padding-left: 0;
+    /* Logo stays visible */
+    .sidebar .logo-section {
+        margin-bottom: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
     }
 
-    /* Hamburger button */
+    /* Show hamburger on mobile */
     .hamburger-btn {
         display: flex !important;
         background: none;
         border: none;
-        font-size: 22px;
+        font-size: 24px;
         color: #334155;
         cursor: pointer;
+        padding: 5px;
+        z-index: 300;
     }
 
-    /* Mobile nav drawer */
-    .mobile-nav-open .nav-links,
-    .mobile-nav-open .sidebar-footer {
-        display: flex !important;
-        flex-direction: column;
+    /* ── Mobile Drawer (slides in from left) ── */
+    .mobile-drawer {
+        display: none;
         position: fixed;
         top: 0; left: 0;
         width: 75%;
+        max-width: 300px;
         height: 100vh;
         background: white;
         z-index: 200;
         padding: 30px 20px;
-        box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.15);
         overflow-y: auto;
     }
 
-    /* Main content takes full width */
+    .mobile-drawer.open {
+        display: flex !important;
+    }
+
+    /* Overlay behind drawer */
+    .drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 199;
+    }
+
+    .drawer-overlay.open {
+        display: block;
+    }
+
+    /* Main content full width */
     .main-content {
         width: 100% !important;
         padding: 20px 15px !important;
         height: auto !important;
         overflow-y: visible !important;
+        min-height: calc(100vh - 70px);
     }
 
-    /* Stack stat cards to 2 columns on mobile */
+    /* Stack stat cards 2 per row */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 12px;
     }
 
-    /* Stack content grid */
     .content-grid,
     .pie-charts-grid {
         grid-template-columns: 1fr !important;
     }
 
-    /* Transactions */
-    .t-row {
-        padding: 15px;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .t-right {
-        gap: 15px;
-    }
-
-    /* Page header stack */
     .page-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
 
-    /* Filter bar wraps */
     .filter-bar {
         flex-wrap: wrap;
         gap: 10px;
     }
 
-    /* Modal full width on mobile */
     .modal-box {
         width: 95vw !important;
         padding: 1.5rem;
     }
 
-    /* Charts height on mobile */
     .line-chart-container,
-    .bar-chart-container {
-        height: 220px;
-    }
-
+    .bar-chart-container,
     .pie-chart-container {
         height: 220px;
     }
-}
-
-/* Hide hamburger on desktop */
-.hamburger-btn {
-    display: none;
 }
