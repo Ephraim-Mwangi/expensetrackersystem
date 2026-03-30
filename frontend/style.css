@@ -1419,3 +1419,141 @@ body.login-page-body {
     border-radius: 5px;
     outline: none;
 }
+
+
+
+
+/* ─── MOBILE RESPONSIVENESS ─────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Allow page to scroll on mobile */
+    body, html {
+        overflow: auto !important;
+        height: auto !important;
+    }
+
+    .container {
+        flex-direction: column;
+        height: auto !important;
+        min-height: 100vh;
+    }
+
+    /* ── Sidebar becomes a top navbar ── */
+    .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: white;
+    }
+
+    /* Hide nav links & user info on mobile */
+    .sidebar .nav-links,
+    .sidebar .sidebar-footer {
+        display: none;
+    }
+
+    /* Show logo only */
+    .logo-section {
+        margin-bottom: 0;
+        padding-left: 0;
+    }
+
+    /* Hamburger button */
+    .hamburger-btn {
+        display: flex !important;
+        background: none;
+        border: none;
+        font-size: 22px;
+        color: #334155;
+        cursor: pointer;
+    }
+
+    /* Mobile nav drawer */
+    .mobile-nav-open .nav-links,
+    .mobile-nav-open .sidebar-footer {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0;
+        width: 75%;
+        height: 100vh;
+        background: white;
+        z-index: 200;
+        padding: 30px 20px;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        overflow-y: auto;
+    }
+
+    /* Main content takes full width */
+    .main-content {
+        width: 100% !important;
+        padding: 20px 15px !important;
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+
+    /* Stack stat cards to 2 columns on mobile */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    /* Stack content grid */
+    .content-grid,
+    .pie-charts-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Transactions */
+    .t-row {
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .t-right {
+        gap: 15px;
+    }
+
+    /* Page header stack */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Filter bar wraps */
+    .filter-bar {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Modal full width on mobile */
+    .modal-box {
+        width: 95vw !important;
+        padding: 1.5rem;
+    }
+
+    /* Charts height on mobile */
+    .line-chart-container,
+    .bar-chart-container {
+        height: 220px;
+    }
+
+    .pie-chart-container {
+        height: 220px;
+    }
+}
+
+/* Hide hamburger on desktop */
+.hamburger-btn {
+    display: none;
+}

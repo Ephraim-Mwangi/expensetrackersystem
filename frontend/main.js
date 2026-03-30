@@ -550,3 +550,8 @@ function formatCurrency(amount) {
     const symbol   = CURRENCY_SYMBOLS[currency] || currency;
     return `${symbol}${parseFloat(amount).toFixed(2)}`;
 }
+
+
+function toggleMobileNav() {
+    document.querySelector('.sidebar').classList.toggle('mobile-nav-open');
+}
