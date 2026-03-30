@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 //  CONFIG
 // ─────────────────────────────────────────────────────────────
-const API_BASE = 'http://127.0.0.1:8000/api';
+const API_BASE = 'https://expensetrackersystem-t3wj.onrender.com/';
 
 function getToken() {
     return localStorage.getItem('authToken');
