@@ -559,3 +559,11 @@ function toggleMobileNav() {
     sidebar.classList.toggle('open');
     overlay.classList.toggle('active');
 }
+
+function toggleMobileNav() {
+    const drawer = document.getElementById('mobileDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    if (!drawer || !overlay) return;
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+}

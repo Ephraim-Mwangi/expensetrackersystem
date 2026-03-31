@@ -1421,199 +1421,158 @@ body.login-page-body {
 }
 
 /* ─── MOBILE RESPONSIVENESS ─────────────────────────── */
+
+/* Hidden on desktop */
+.hamburger-btn { display: none; }
+.mobile-drawer { display: none; }
+.drawer-overlay { display: none; }
+
 @media (max-width: 768px) {
 
-    /* Allow page to scroll on mobile */
+    /* Page scrolls on mobile */
     body, html {
         overflow: auto !important;
         height: auto !important;
     }
 
+    /* Stack layout vertically */
     .container {
-        flex-direction: column;
+        flex-direction: column !important;
         height: auto !important;
-        min-height: 100vh;
+        min-height: 100vh !important;
+        overflow: visible !important;
     }
 
-    /* ── Sidebar becomes a top navbar ── */
+    /* Sidebar becomes a slim top bar */
     .sidebar {
         width: 100% !important;
-        height: auto !important;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 20px;
-        border-right: none;
-        border-bottom: 1px solid #e2e8f0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: white;
+        height: 65px !important;
+        min-height: 65px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 20px !important;
+        border-right: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 100 !important;
+        background: white !important;
+        overflow: visible !important;
     }
 
-    /* Hide nav links & user info on mobile */
-    .sidebar .nav-links,
-    .sidebar .sidebar-footer {
-        display: none;
+    /* Logo section fills the bar */
+    .sidebar .logo-section {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        margin-bottom: 0 !important;
+        padding-left: 0 !important;
+        gap: 10px !important;
     }
 
-    /* Show logo only */
-    .logo-section {
-        margin-bottom: 0;
-        padding-left: 0;
+    /* Hide nav and footer IN the sidebar — drawer handles navigation */
+    .sidebar > ul.nav-links,
+    .sidebar > .sidebar-footer {
+        display: none !important;
     }
 
-    /* Hamburger button */
+    /* Show hamburger */
     .hamburger-btn {
         display: flex !important;
-        background: none;
-        border: none;
-        font-size: 22px;
-        color: #334155;
-        cursor: pointer;
+        align-items: center !important;
+        justify-content: center !important;
+        background: none !important;
+        border: none !important;
+        font-size: 24px !important;
+        color: #334155 !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        flex-shrink: 0 !important;
     }
 
-    /* Mobile nav drawer */
-    .mobile-nav-open .nav-links,
-    .mobile-nav-open .sidebar-footer {
-        display: flex !important;
-        flex-direction: column;
-        position: fixed;
-        top: 0; left: 0;
-        width: 75%;
-        height: 100vh;
-        background: white;
-        z-index: 200;
-        padding: 30px 20px;
-        box-shadow: 4px 0 20px rgba(0,0,0,0.1);
-        overflow-y: auto;
-    }
-
-    /* Main content takes full width */
+    /* Main content full width */
     .main-content {
         width: 100% !important;
         padding: 20px 15px !important;
         height: auto !important;
         overflow-y: visible !important;
+        min-height: calc(100vh - 65px) !important;
     }
 
-    /* Stack stat cards to 2 columns on mobile */
+    /* 2-column stat cards */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px;
+        gap: 12px !important;
     }
 
-    /* Stack content grid */
+    /* Single column grids */
     .content-grid,
     .pie-charts-grid {
         grid-template-columns: 1fr !important;
     }
 
-    /* Transactions */
-    .t-row {
-        padding: 15px;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .t-right {
-        gap: 15px;
-    }
-
-    /* Page header stack */
     .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
     }
 
-    /* Filter bar wraps */
     .filter-bar {
-        flex-wrap: wrap;
-        gap: 10px;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
     }
 
-    /* Modal full width on mobile */
+    .t-row {
+        padding: 12px 15px !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
     .modal-box {
         width: 95vw !important;
-        padding: 1.5rem;
+        padding: 1.2rem !important;
     }
 
-    /* Charts height on mobile */
     .line-chart-container,
-    .bar-chart-container {
-        height: 220px;
-    }
-
+    .bar-chart-container,
     .pie-chart-container {
-        height: 220px;
+        height: 220px !important;
     }
-}
 
-/* Hide hamburger on desktop */
-.hamburger-btn {
-    display: none;
-}
-
-/* ─────────────────────────────────────────────
-   MOBILE SIDEBAR LAYOUT FIX
-───────────────────────────────────────────── */
-@media (max-width: 768px) {
-    /* Make sidebar a proper flex column so all sections are visible */
-    .sidebar {
-        display: flex !important;
+    /* ── Mobile Drawer ── */
+    .mobile-drawer {
+        display: none;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 78% !important;
+        max-width: 300px !important;
+        height: 100vh !important;
+        background: white !important;
+        z-index: 999 !important;
+        padding: 25px 20px !important;
         flex-direction: column !important;
-        padding: 20px 15px !important;
+        box-shadow: 4px 0 25px rgba(0,0,0,0.15) !important;
         overflow-y: auto !important;
     }
 
-    /* Logo row: keep logo left, hide the hamburger button inside sidebar */
-    .logo-section {
+    .mobile-drawer.open {
         display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-        margin-bottom: 30px !important;
-        flex-wrap: nowrap !important;
     }
 
-    /* Hide the hamburger that's inside the sidebar on mobile 
-       (the floating one outside already handles toggling) */
-    .logo-section .hamburger-btn {
-        display: none !important;
+    /* Dark overlay */
+    .drawer-overlay {
+        display: none;
+        position: fixed !important;
+        inset: 0 !important;
+        background: rgba(0,0,0,0.45) !important;
+        z-index: 998 !important;
     }
 
-    /* Nav links take up available space */
-    .nav-links {
-        flex: 1 !important;
+    .drawer-overlay.open {
         display: block !important;
-    }
-
-    /* Each nav item clearly visible */
-    .nav-links li {
-        margin-bottom: 8px !important;
-    }
-
-    .nav-links a {
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-        padding: 12px 16px !important;
-        border-radius: 10px !important;
-        font-size: 15px !important;
-        color: #64748b !important;
-        text-decoration: none !important;
-    }
-
-    .nav-links li.active a {
-        background-color: #e0e7ff !important;
-        color: #4338ca !important;
-        font-weight: 600 !important;
-    }
-
-    /* Footer sticks to bottom */
-    .sidebar-footer {
-        margin-top: auto !important;
-        padding-top: 20px !important;
-        border-top: 1px solid #e2e8f0 !important;
     }
 }
