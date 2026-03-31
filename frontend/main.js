@@ -3,6 +3,13 @@
 // ─────────────────────────────────────────────────────────────
 const API_BASE = 'https://expensetrackersystem-t3wj.onrender.com/api';
 
+// ── Chart instances (prevents "canvas already in use" error) ──
+let expensesChartInstance = null;
+let monthlyChartInstance  = null;
+let categoryChartInstance = null;
+let expensePieInstance    = null;
+let incomePieInstance     = null;
+
 function getToken() {
     return localStorage.getItem('authToken');
 }
@@ -13,7 +20,6 @@ function getToken() {
 async function apiRequest(endpoint, method = 'GET', body = null) {
     const token = getToken();
 
-    // No token = not logged in, go to login page
     if (!token) {
         console.warn('No token found, redirecting to login.');
         if (!window.location.pathname.includes('login') && window.location.pathname !== '/') {
@@ -27,15 +33,11 @@ async function apiRequest(endpoint, method = 'GET', body = null) {
         'Authorization': `Token ${token}`
     };
 
-    console.log(`API Request: ${method} ${API_BASE}${endpoint}`);
-    console.log('Authorization header:', `Token ${token.substring(0, 10)}...`);
-
     const options = { method, headers };
     if (body) options.body = JSON.stringify(body);
 
     try {
         const response = await fetch(`${API_BASE}${endpoint}`, options);
-        console.log(`Response status: ${response.status}`);
 
         if (response.status === 401) {
             console.error('401 Unauthorized — token invalid or expired');
@@ -45,10 +47,9 @@ async function apiRequest(endpoint, method = 'GET', body = null) {
             return null;
         }
 
-        if (response.status === 204) return null; // DELETE success
+        if (response.status === 204) return null;
 
         const data = await response.json();
-        console.log('Response data:', data);
         return data;
 
     } catch (err) {
@@ -68,8 +69,13 @@ function parseApiError(data) {
     }
     return messages.join('\n') || 'An unknown error occurred.';
 }
+
+// ─────────────────────────────────────────────────────────────
+//  SINGLE DOMContentLoaded — runs everything once
+// ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-    // Load currency first before rendering amounts
+
+    // Load currency first
     const token = localStorage.getItem('authToken');
     if (token) {
         try {
@@ -83,6 +89,58 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch(e) {}
     }
 
+    // Auth form (login/register) — only on index.html
+    const authForm = document.getElementById('authForm');
+    if (authForm) {
+        authForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email    = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const fullName = document.getElementById('fullname')?.value.trim() || '';
+
+            if (!email || !password) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            try {
+                let response, data;
+
+                if (isLoginMode) {
+                    response = await fetch(`${API_BASE}/auth/login/`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                } else {
+                    response = await fetch(`${API_BASE}/auth/register/`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password, full_name: fullName })
+                    });
+                }
+
+                data = await response.json();
+                console.log('Auth response:', data);
+
+                if (!response.ok) {
+                    alert(parseApiError(data));
+                    return;
+                }
+
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                window.location.href = '/dashboard.html';
+
+            } catch (err) {
+                console.error('Auth error:', err);
+                alert('Could not reach the server. Is Django running?');
+            }
+        });
+    }
+
+    // Load page-specific data
     loadDashboard();
     loadTransactions();
     loadAnalytics();
@@ -93,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // ─────────────────────────────────────────────────────────────
-//  LOGIN PAGE  (index.html)
+//  LOGIN PAGE TABS
 // ─────────────────────────────────────────────────────────────
 let isLoginMode = true;
 
@@ -111,62 +169,6 @@ function switchTab(mode) {
     submitBtn.textContent   = isLoginMode ? 'Login' : 'Sign Up';
 }
 
-const authForm = document.getElementById('authForm');
-if (authForm) {
-    authForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        const email    = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-        const fullName = document.getElementById('fullname')?.value.trim() || '';
-
-        if (!email || !password) {
-            alert('Please fill in all fields.');
-            return;
-        }
-
-        try {
-            let response, data;
-
-            if (isLoginMode) {
-                response = await fetch(`${API_BASE}/auth/login/`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-            } else {
-                response = await fetch(`${API_BASE}/auth/register/`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password, full_name: fullName })
-                });
-            }
-
-            data = await response.json();
-            console.log('Auth response:', data);
-
-            if (!response.ok) {
-                alert(parseApiError(data));
-                return;
-            }
-
-            // Save token and user info
-            localStorage.setItem('authToken', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-
-            console.log('Token saved:', data.token);
-            console.log('Redirecting to /dashboard/');
-
-            window.location.href = '/dashboard.html';
-
-        } catch (err) {
-            console.error('Auth error:', err);
-            alert('Could not reach the server. Is Django running?');
-        }
-    });
-}
-
-
 // ─────────────────────────────────────────────────────────────
 //  SHARED: load user profile into sidebar
 // ─────────────────────────────────────────────────────────────
@@ -176,42 +178,36 @@ function loadUserProfile() {
 
     try {
         const user = JSON.parse(userStr);
-        const avatarEl = document.querySelector('.avatar');
-        const nameEl   = document.querySelector('.user-info h4');
-        const emailEl  = document.querySelector('.user-info p');
-
-        if (avatarEl) avatarEl.textContent = user.avatar_letter || (user.username?.[0]?.toUpperCase()) || 'U';
-        if (nameEl)   nameEl.textContent   = user.full_name || user.username || 'User';
-        if (emailEl)  emailEl.textContent  = user.email || '';
+        document.querySelectorAll('.avatar').forEach(el => {
+            el.textContent = user.avatar_letter || (user.username?.[0]?.toUpperCase()) || 'U';
+        });
+        document.querySelectorAll('.user-info h4').forEach(el => {
+            el.textContent = user.full_name || user.username || 'User';
+        });
+        document.querySelectorAll('.user-info p').forEach(el => {
+            el.textContent = user.email || '';
+        });
     } catch (e) {
         console.error('Failed to parse user from localStorage', e);
     }
 }
 
-
 // ─────────────────────────────────────────────────────────────
-//  DASHBOARD PAGE  (dashboard.html)
+//  DASHBOARD PAGE
 // ─────────────────────────────────────────────────────────────
 async function loadDashboard() {
     if (!document.getElementById('expensesChart')) return;
 
     loadUserProfile();
 
-    console.log('Loading dashboard data...');
     const data = await apiRequest('/dashboard/');
-    if (!data) {
-        console.error('No dashboard data returned');
-        return;
-    }
+    if (!data) return;
 
-    // Update stat cards
-    // Update stat cards using IDs
-    document.getElementById('total-income').textContent     = formatCurrency(data.total_income);
-    document.getElementById('total-expenses').textContent   = formatCurrency(data.total_expenses);
-    document.getElementById('balance').textContent          = formatCurrency(data.balance);
+    document.getElementById('total-income').textContent      = formatCurrency(data.total_income);
+    document.getElementById('total-expenses').textContent    = formatCurrency(data.total_expenses);
+    document.getElementById('balance').textContent           = formatCurrency(data.balance);
     document.getElementById('transaction-count').textContent = data.transaction_count;
 
-    // Update recent transactions
     const list = document.querySelector('.transaction-list');
     if (list) {
         if (data.recent_transactions && data.recent_transactions.length) {
@@ -225,7 +221,7 @@ async function loadDashboard() {
                         <p>${t.title || t.description || ''}</p>
                     </div>
                     <div class="t-amount ${t.type === 'income' ? 'green' : 'red'}-text">
-                     ${t.type === 'income' ? '+' : '-'}${formatCurrency(t.amount)}   
+                        ${t.type === 'income' ? '+' : '-'}${formatCurrency(t.amount)}
                     </div>
                 </div>
             `).join('');
@@ -234,10 +230,14 @@ async function loadDashboard() {
         }
     }
 
-    // Render doughnut chart
+    // ✅ Destroy existing chart before creating new one
     const ctx = document.getElementById('expensesChart');
     if (ctx && typeof Chart !== 'undefined') {
-        new Chart(ctx.getContext('2d'), {
+        if (expensesChartInstance) {
+            expensesChartInstance.destroy();
+            expensesChartInstance = null;
+        }
+        expensesChartInstance = new Chart(ctx.getContext('2d'), {
             type: 'doughnut',
             data: {
                 labels: ['Bills', 'Shopping', 'Food', 'Healthcare', 'Transport', 'Entertainment'],
@@ -260,9 +260,8 @@ async function loadDashboard() {
     }
 }
 
-
 // ─────────────────────────────────────────────────────────────
-//  TRANSACTIONS PAGE  (transactions.html)
+//  TRANSACTIONS PAGE
 // ─────────────────────────────────────────────────────────────
 async function loadTransactions() {
     const list = document.querySelector('.transaction-list-full');
@@ -298,7 +297,7 @@ async function loadTransactions() {
                 </div>
                 <div class="t-right">
                     <span class="amount ${t.type === 'income' ? 'green' : 'red'}-text">
-                      ${t.type === 'income' ? '+' : '-'}${formatCurrency(t.amount)}  
+                        ${t.type === 'income' ? '+' : '-'}${formatCurrency(t.amount)}
                     </span>
                     <button class="delete-btn" onclick="deleteTransaction(${t.id})">
                         <i class="fa-regular fa-trash-can"></i>
@@ -330,7 +329,7 @@ function setupAddTransaction() {
                     <input type="text" id="m-title" placeholder="e.g. Grocery run" />
                 </div>
                 <div class="input-group">
-                    <label>Amount ($)</label>
+                    <label>Amount</label>
                     <input type="number" id="m-amount" placeholder="0.00" min="0" step="0.01" />
                 </div>
                 <div class="input-group">
@@ -366,53 +365,40 @@ function setupAddTransaction() {
         `;
         document.body.appendChild(modal);
 
-// Use event delegation instead of getElementById
-modal.addEventListener('click', async (e) => {
-    if (e.target.id === 'm-cancel' || e.target.closest('#m-cancel')) {
-        modal.remove();
-        return;
-    }
+        modal.addEventListener('click', async (e) => {
+            if (e.target.id === 'm-cancel' || e.target.closest('#m-cancel')) {
+                modal.remove();
+                return;
+            }
+            if (e.target.id === 'm-save' || e.target.closest('#m-save')) {
+                const payload = {
+                    title:       modal.querySelector('#m-title')?.value.trim(),
+                    amount:      parseFloat(modal.querySelector('#m-amount')?.value),
+                    type:        modal.querySelector('#m-type')?.value,
+                    category:    modal.querySelector('#m-category')?.value,
+                    date:        modal.querySelector('#m-date')?.value,
+                    description: '',
+                };
 
-    if (e.target.id === 'm-save' || e.target.closest('#m-save')) {
-    const titleEl    = modal.querySelector('#m-title');
-    const amountEl   = modal.querySelector('#m-amount');
-    const typeEl     = modal.querySelector('#m-type');
-    const categoryEl = modal.querySelector('#m-category');
-    const dateEl     = modal.querySelector('#m-date');
+                if (!payload.title || !payload.amount || !payload.date) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
 
-    const payload = {
-        title:       titleEl?.value.trim(),
-        amount:      parseFloat(amountEl?.value),
-        type:        typeEl?.value,
-        category:    categoryEl?.value,
-        date:        dateEl?.value,
-        description: '',
-    };
-
-    console.log('Saving transaction:', payload);
-
-    if (!payload.title || !payload.amount || !payload.date) {
-        alert(`Please fill in all fields.\nTitle: "${payload.title}"\nAmount: ${payload.amount}\nDate: "${payload.date}"`);
-        return;
-    }
-
-    const result = await apiRequest('/transactions/', 'POST', payload);
-    console.log('Save result:', result);
-
-    if (result && result.id) {
-        modal.remove();
-        loadTransactions();
-    } else {
-        alert('Failed to save transaction. Check the console for details.');
-    }
-}
-});
+                const result = await apiRequest('/transactions/', 'POST', payload);
+                if (result && result.id) {
+                    modal.remove();
+                    loadTransactions();
+                } else {
+                    alert('Failed to save transaction. Check the console for details.');
+                }
+            }
+        });
     });
 }
 
-
 // ─────────────────────────────────────────────────────────────
-//  ANALYTICS PAGE  (analytics.html)
+//  ANALYTICS PAGE
 // ─────────────────────────────────────────────────────────────
 async function loadAnalytics() {
     if (!document.getElementById('monthlyTrendChart')) return;
@@ -427,7 +413,9 @@ async function loadAnalytics() {
     const colorIncome  = '#2dd4bf';
     const colorExpense = '#f87171';
 
-    new Chart(document.getElementById('monthlyTrendChart').getContext('2d'), {
+    // ✅ Destroy before recreating
+    if (monthlyChartInstance) { monthlyChartInstance.destroy(); }
+    monthlyChartInstance = new Chart(document.getElementById('monthlyTrendChart').getContext('2d'), {
         type: 'line',
         data: {
             labels: data.monthly_labels,
@@ -442,7 +430,9 @@ async function loadAnalytics() {
     const cats   = Object.keys(data.category_breakdown);
     const barInc = cats.map(c => data.category_breakdown[c].income  || 0);
     const barExp = cats.map(c => data.category_breakdown[c].expense || 0);
-    new Chart(document.getElementById('categoryBarChart').getContext('2d'), {
+
+    if (categoryChartInstance) { categoryChartInstance.destroy(); }
+    categoryChartInstance = new Chart(document.getElementById('categoryBarChart').getContext('2d'), {
         type: 'bar',
         data: {
             labels: cats.map(capitalize),
@@ -456,7 +446,8 @@ async function loadAnalytics() {
 
     const expLabels = Object.keys(data.expense_distribution);
     if (expLabels.length) {
-        new Chart(document.getElementById('expensePieChart').getContext('2d'), {
+        if (expensePieInstance) { expensePieInstance.destroy(); }
+        expensePieInstance = new Chart(document.getElementById('expensePieChart').getContext('2d'), {
             type: 'pie',
             data: {
                 labels: expLabels.map(capitalize),
@@ -469,7 +460,8 @@ async function loadAnalytics() {
 
     const incLabels = Object.keys(data.income_distribution);
     if (incLabels.length) {
-        new Chart(document.getElementById('incomePieChart').getContext('2d'), {
+        if (incomePieInstance) { incomePieInstance.destroy(); }
+        incomePieInstance = new Chart(document.getElementById('incomePieChart').getContext('2d'), {
             type: 'pie',
             data: {
                 labels: incLabels.map(capitalize),
@@ -481,22 +473,29 @@ async function loadAnalytics() {
     }
 }
 
-
 // ─────────────────────────────────────────────────────────────
 //  LOGOUT
 // ─────────────────────────────────────────────────────────────
 document.querySelectorAll('.logout-btn').forEach(btn => {
     btn.addEventListener('click', async (e) => {
         e.preventDefault();
-        try {
-            await apiRequest('/auth/logout/', 'POST');
-        } catch (e) {}
+        try { await apiRequest('/auth/logout/', 'POST'); } catch (e) {}
         localStorage.removeItem('authToken');
         localStorage.removeItem('user');
         window.location.href = '/';
     });
 });
 
+// ─────────────────────────────────────────────────────────────
+//  MOBILE NAV — single function, no duplicates
+// ─────────────────────────────────────────────────────────────
+function toggleMobileNav() {
+    const drawer  = document.getElementById('mobileDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    if (!drawer || !overlay) return;
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+}
 
 // ─────────────────────────────────────────────────────────────
 //  HELPERS
@@ -507,6 +506,17 @@ function capitalize(str) {
 
 function formatDate(dateStr) {
     return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function formatCurrency(amount) {
+    const CURRENCY_SYMBOLS = {
+        USD: '$', EUR: '€', GBP: '£', KES: 'KSh',
+        NGN: '₦', GHS: '₵', ZAR: 'R', UGX: 'USh',
+        TZS: 'TSh', CAD: 'C$', AUD: 'A$', JPY: '¥', INR: '₹'
+    };
+    const currency = localStorage.getItem('userCurrency') || 'USD';
+    const symbol   = CURRENCY_SYMBOLS[currency] || currency;
+    return `${symbol}${parseFloat(amount).toFixed(2)}`;
 }
 
 function categoryIcon(cat) {
@@ -525,45 +535,4 @@ function categoryColor(cat) {
         food: 'red', transportation: 'yellow', transport: 'yellow', bills: 'blue'
     };
     return colors[(cat || '').toLowerCase()] || 'blue';
-}
-
-
-// ─────────────────────────────────────────────────────────────
-//  INIT
-// ─────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    loadDashboard();
-    loadTransactions();
-    loadAnalytics();
-    setupAddTransaction();
-
-    document.querySelector('.search-wrapper input')?.addEventListener('input', loadTransactions);
-    document.querySelector('.filter-wrapper select')?.addEventListener('change', loadTransactions);
-});
-function formatCurrency(amount) {
-    const CURRENCY_SYMBOLS = {
-        USD: '$', EUR: '€', GBP: '£', KES: 'KSh',
-        NGN: '₦', GHS: '₵', ZAR: 'R', UGX: 'USh',
-        TZS: 'TSh', CAD: 'C$', AUD: 'A$', JPY: '¥', INR: '₹'
-    };
-    const currency = localStorage.getItem('userCurrency') || 'USD';
-    const symbol   = CURRENCY_SYMBOLS[currency] || currency;
-    return `${symbol}${parseFloat(amount).toFixed(2)}`;
-}
-
-
-function toggleMobileNav() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    if (!sidebar || !overlay) return;
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('active');
-}
-
-function toggleMobileNav() {
-    const drawer = document.getElementById('mobileDrawer');
-    const overlay = document.getElementById('drawerOverlay');
-    if (!drawer || !overlay) return;
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('open');
 }
