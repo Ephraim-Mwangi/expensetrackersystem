@@ -11,13 +11,13 @@
 <body>
     <div class="container">
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileNav()"></div>
+        <button class="hamburger-btn" onclick="toggleMobileNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
         <nav class="sidebar" id="sidebar">
             <div class="logo-section">
                 <div class="logo-icon"><i class="fa-solid fa-wallet"></i></div>
                 <div class="logo-text"><h2>Expense<br>Tracker</h2><p>Personal Finance</p></div>
-                <button class="hamburger-btn" onclick="toggleMobileNav()">
-                    <i class="fa-solid fa-bars"></i>
-                </button>   
             </div>
             <ul class="nav-links">
                 <li class="active"><a href="/dashboard/"><i class="fa-solid fa-border-all"></i><span>Dashboard</span></a></li>
@@ -85,22 +85,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/main.js"></script>
-
-<script>
-async function updateCurrency(value) {
-    const token = localStorage.getItem('token');
-    await fetch('/api/currency/', {
-        method:  'PATCH',
-        headers: {
-            'Authorization': `Token ${token}`,
-            'Content-Type':  'application/json'
-        },
-        body: JSON.stringify({ currency: value })
-    });
-    localStorage.setItem('userCurrency', value);
-    location.reload(); // reload to apply new currency
-}
-</script>
 
 <script>
 async function updateCurrency(value) {
