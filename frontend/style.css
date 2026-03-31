@@ -1421,158 +1421,262 @@ body.login-page-body {
 }
 
 /* ─── MOBILE RESPONSIVENESS ─────────────────────────── */
-
-/* Hidden on desktop */
-.hamburger-btn { display: none; }
-.mobile-drawer { display: none; }
-.drawer-overlay { display: none; }
-
 @media (max-width: 768px) {
 
-    /* Page scrolls on mobile */
+    /* Allow page to scroll on mobile */
     body, html {
         overflow: auto !important;
         height: auto !important;
     }
 
-    /* Stack layout vertically */
     .container {
-        flex-direction: column !important;
+        flex-direction: column;
         height: auto !important;
-        min-height: 100vh !important;
-        overflow: visible !important;
+        min-height: 100vh;
     }
 
-    /* Sidebar becomes a slim top bar */
+    /* ── Sidebar becomes a top navbar ── */
     .sidebar {
         width: 100% !important;
-        height: 65px !important;
-        min-height: 65px !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        padding: 0 20px !important;
-        border-right: none !important;
-        border-bottom: 1px solid #e2e8f0 !important;
-        position: sticky !important;
-        top: 0 !important;
-        z-index: 100 !important;
-        background: white !important;
-        overflow: visible !important;
+        height: auto !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: white;
     }
 
-    /* Logo section fills the bar */
-    .sidebar .logo-section {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        margin-bottom: 0 !important;
-        padding-left: 0 !important;
-        gap: 10px !important;
+    /* Hide nav links & user info on mobile */
+    .sidebar .nav-links,
+    .sidebar .sidebar-footer {
+        display: none;
     }
 
-    /* Hide nav and footer IN the sidebar — drawer handles navigation */
-    .sidebar > ul.nav-links,
-    .sidebar > .sidebar-footer {
-        display: none !important;
+    /* Show logo only */
+    .logo-section {
+        margin-bottom: 0;
+        padding-left: 0;
     }
 
-    /* Show hamburger */
+    /* Hamburger button */
     .hamburger-btn {
         display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: none !important;
-        border: none !important;
-        font-size: 24px !important;
-        color: #334155 !important;
-        cursor: pointer !important;
-        padding: 8px !important;
-        flex-shrink: 0 !important;
+        background: none;
+        border: none;
+        font-size: 22px;
+        color: #334155;
+        cursor: pointer;
     }
 
-    /* Main content full width */
+    /* Mobile nav drawer */
+    .mobile-nav-open .nav-links,
+    .mobile-nav-open .sidebar-footer {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0;
+        width: 75%;
+        height: 100vh;
+        background: white;
+        z-index: 200;
+        padding: 30px 20px;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        overflow-y: auto;
+    }
+
+    /* Main content takes full width */
     .main-content {
         width: 100% !important;
         padding: 20px 15px !important;
         height: auto !important;
         overflow-y: visible !important;
-        min-height: calc(100vh - 65px) !important;
     }
 
-    /* 2-column stat cards */
+    /* Stack stat cards to 2 columns on mobile */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
+        gap: 12px;
     }
 
-    /* Single column grids */
+    /* Stack content grid */
     .content-grid,
     .pie-charts-grid {
         grid-template-columns: 1fr !important;
     }
 
-    .page-header {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 10px !important;
-    }
-
-    .filter-bar {
-        flex-wrap: wrap !important;
-        gap: 10px !important;
-    }
-
+    /* Transactions */
     .t-row {
-        padding: 12px 15px !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
+    .t-right {
+        gap: 15px;
+    }
+
+    /* Page header stack */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Filter bar wraps */
+    .filter-bar {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Modal full width on mobile */
     .modal-box {
         width: 95vw !important;
-        padding: 1.2rem !important;
+        padding: 1.5rem;
     }
 
+    /* Charts height on mobile */
     .line-chart-container,
-    .bar-chart-container,
-    .pie-chart-container {
-        height: 220px !important;
+    .bar-chart-container {
+        height: 220px;
     }
 
-    /* ── Mobile Drawer ── */
-    .mobile-drawer {
-        display: none;
+    .pie-chart-container {
+        height: 220px;
+    }
+}
+
+/* Hide hamburger on desktop */
+.hamburger-btn {
+    display: none;
+}
+
+/* ─────────────────────────────────────────────
+   FINAL MOBILE SIDEBAR OVERLAY FIX
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Sidebar: fully fixed, slides in from left as overlay */
+    #sidebar {
         position: fixed !important;
         top: 0 !important;
-        left: 0 !important;
-        width: 78% !important;
-        max-width: 300px !important;
+        left: -280px !important;
+        width: 270px !important;
         height: 100vh !important;
+        z-index: 1000 !important;
         background: white !important;
-        z-index: 999 !important;
-        padding: 25px 20px !important;
-        flex-direction: column !important;
-        box-shadow: 4px 0 25px rgba(0,0,0,0.15) !important;
-        overflow-y: auto !important;
-    }
-
-    .mobile-drawer.open {
         display: flex !important;
+        flex-direction: column !important;
+        padding: 25px 18px !important;
+        overflow-y: auto !important;
+        transition: left 0.3s ease !important;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.15) !important;
     }
 
-    /* Dark overlay */
-    .drawer-overlay {
+    /* Slide in when open */
+    #sidebar.open {
+        left: 0 !important;
+    }
+
+    /* Main content takes full width — NOT pushed by sidebar */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 70px 16px 20px 16px !important;
+    }
+
+    /* Floating hamburger button */
+    .hamburger-btn {
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+        z-index: 1100 !important;
+        background: #6366f1 !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 10px !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 20px !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 4px 12px rgba(99,102,241,0.4) !important;
+    }
+
+    /* Hide hamburger button that's inside the sidebar logo section */
+    .logo-section .hamburger-btn {
+        display: none !important;
+    }
+
+    /* Dark overlay behind open sidebar */
+    #sidebarOverlay {
         display: none;
         position: fixed !important;
         inset: 0 !important;
-        background: rgba(0,0,0,0.45) !important;
-        z-index: 998 !important;
+        background: rgba(0,0,0,0.5) !important;
+        z-index: 999 !important;
+    }
+    #sidebarOverlay.active {
+        display: block !important;
     }
 
-    .drawer-overlay.open {
-        display: block !important;
+    /* Nav links layout inside sidebar */
+    .logo-section {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        margin-bottom: 35px !important;
+    }
+
+    .nav-links {
+        flex: 1 !important;
+        list-style: none !important;
+    }
+
+    .nav-links li {
+        margin-bottom: 6px !important;
+    }
+
+    .nav-links a {
+        display: flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        padding: 13px 18px !important;
+        border-radius: 12px !important;
+        font-size: 15px !important;
+        color: #64748b !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+    }
+
+    .nav-links a:hover,
+    .nav-links li.active a {
+        background-color: #e0e7ff !important;
+        color: #4338ca !important;
+        font-weight: 600 !important;
+    }
+
+    .sidebar-footer {
+        margin-top: auto !important;
+        padding-top: 20px !important;
+        border-top: 1px solid #e2e8f0 !important;
+    }
+
+    /* Stack stats 2 per row */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Stack chart sections */
+    .content-grid,
+    .pie-charts-grid {
+        grid-template-columns: 1fr !important;
     }
 }
